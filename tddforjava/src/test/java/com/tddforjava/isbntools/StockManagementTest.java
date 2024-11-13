@@ -9,19 +9,10 @@ public class StockManagementTest {
     @Test
     public void canGetACorrectLocatorCode() {
 
-        ISBNDataService webService = new ISBNDataService() {
-            @Override
-            public Book lookup(String isbn) {
-                return new Book(isbn, "Of Mice And Men", "J. Steinbeck");
-            }
-        };
-
-        ISBNDataService database = new ISBNDataService() {
-            @Override
-            public Book lookup(String isbn) {
-                return null;
-            }
-        };
+        ISBNDataService database = mock(ISBNDataService.class);
+        when(database.lookup("0140177396")).thenReturn(null);
+        ISBNDataService webService = mock(ISBNDataService.class);
+        when(webService.lookup("0140177396")).thenReturn(new Book("0140177396", "Of Mice and Men", "J. Steinbeck"));
 
         StockManager stockManager = new StockManager();
         stockManager.setISBNWebService(webService);
@@ -35,8 +26,8 @@ public class StockManagementTest {
     @Test
     public void databaseIsUsedIfDataIsPresent() {
         ISBNDataService database = mock(ISBNDataService.class);
-        ISBNDataService webService = mock(ISBNDataService.class);
         when(database.lookup("0140177396")).thenReturn(new Book("0140177396", "ABC", "ABC"));
+        ISBNDataService webService = mock(ISBNDataService.class);
 
         StockManager stockManager = new StockManager();
         stockManager.setISBNWebService(webService);
@@ -52,9 +43,10 @@ public class StockManagementTest {
     @Test
     public void databaseIsUsedIfDataIsPresentInDatabase() {
         ISBNDataService database = mock(ISBNDataService.class);
+        when(database.lookup("0140177396")).thenReturn(null);
+
         ISBNDataService webService = mock(ISBNDataService.class);
         when(webService.lookup("0140177396")).thenReturn(new Book("0140177396", "ABC", "ABC"));
-        when(database.lookup("0140177396")).thenReturn(null);
 
         StockManager stockManager = new StockManager();
         stockManager.setISBNWebService(webService);
