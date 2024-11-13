@@ -1,12 +1,16 @@
 package com.tddforjava.isbntools;
 
 import org.junit.jupiter.api.Test;
+
+import com.tddforjava.isbntools.validator.ValidateISBN;
+
 import static org.junit.jupiter.api.Assertions.*;
 
-public class ValidateISBNTest {
+public class ISBNTest {
 
     // Valid ISBNs
     // ISBN-10: 1491950358
+    // ISBN-10X: 012000030X
     // ISBN-13: 978-1491950357
 
     // ISBN-10: 1617294543

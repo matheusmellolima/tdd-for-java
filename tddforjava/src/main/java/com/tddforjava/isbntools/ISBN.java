@@ -1,5 +1,8 @@
 package com.tddforjava.isbntools;
 
+import com.tddforjava.isbntools.validator.IValidateISBN;
+import com.tddforjava.isbntools.validator.ValidateISBN;
+
 public class ISBN {
 
     IValidateISBN validator;

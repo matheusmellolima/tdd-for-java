@@ -1,4 +1,4 @@
-package com.tddforjava.isbntools;
+package com.tddforjava.isbntools.validator;
 
 public interface IValidateISBN {
 
