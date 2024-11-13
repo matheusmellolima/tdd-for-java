@@ -2,16 +2,22 @@ package com.tddforjava.isbntools;
 
 public class StockManager {
 
-    private ExternalISBNDataService isbnDataService;
-
+    private ISBNDataService webService;
+    private ISBNDataService database;
     
 
-    public void setISBNDataService(ExternalISBNDataService service) {
-        this.isbnDataService = service;
+    public void setISBNWebService(ISBNDataService service) {
+        this.webService = service;
+    }
+
+    public void setISBNDatabase(ISBNDataService service) {
+        this.database = service;
     }
 
     public String getLocatorCode(String isbn) {
-        Book book = this.isbnDataService.lookup(isbn);
+        Book book = this.database.lookup(isbn);
+        if (book == null) book = this.webService.lookup(isbn);
+        
         StringBuilder locator = new StringBuilder();
         locator.append(book.getIsbn().substring(isbn.length() - 4));
         locator.append(book.getAuthor().substring(0,1));

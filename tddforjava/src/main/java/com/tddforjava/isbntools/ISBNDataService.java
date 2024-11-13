@@ -1,5 +1,5 @@
 package com.tddforjava.isbntools;
 
-public interface ExternalISBNDataService {
+public interface ISBNDataService {
     public Book lookup(String ibsn);
 }
